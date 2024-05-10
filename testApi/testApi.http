@@ -1,6 +1,6 @@
 @testApi_HostAddress = http://localhost:5159
 
-GET {{testApi_HostAddress}}/weatherforecast/
+GET {{testApi_HostAddress}}/esp8266Data/
 Accept: application/json
 
 ###

@@ -1,0 +1,44 @@
+﻿@model List<testApi.Models.esp8266Data>
+@{
+    ViewData["Title"] = "View";
+}
+
+<h1>Temperature Checker</h1>
+
+<table class="table">
+    @* <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.timestamp)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.humidity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.temperature)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.thing)
+            </th>
+            <th></th>
+        </tr>
+    </thead>*@
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.timestamp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.humidity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.temperature)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.thing)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
