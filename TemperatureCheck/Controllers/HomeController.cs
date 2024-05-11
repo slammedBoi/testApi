@@ -15,7 +15,7 @@ namespace TemperatureCheck.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index", "esp8266Data");
         }
 
         public IActionResult Privacy()

@@ -1,44 +1,65 @@
-﻿@model List<testApi.Models.esp8266Data>
+﻿@model List<List<TempCommon.esp8266Data>>
 @{
     ViewData["Title"] = "View";
 }
 
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
 <h1>Temperature Checker</h1>
 
-<table class="table">
-    @* <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.timestamp)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.humidity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.temperature)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.thing)
-            </th>
-            <th></th>
-        </tr>
-    </thead>*@
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.timestamp)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.humidity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.temperature)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.thing)
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+@foreach(var element in Model)
+        {
+        <h4>This is @Html.DisplayFor(modelItem => element[0].thing)</h4>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Time
+                    </th>
+                    <th>
+                        Humidity
+                    </th>
+                    <th>
+                        Temperature
+                    </th>
+                    <th>
+                        Thing Name
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach(var item in element)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.timestamp)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.humidity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.temperature)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.thing)
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+        }
+
+@* This is used to update the page when new data comes from dynamoDB *@
+@* <script>
+    window.setTimeout(function() 
+    {
+        window.location.reload(true);
+        alert("reloading page");
+    }, 30000);
+</script> *@

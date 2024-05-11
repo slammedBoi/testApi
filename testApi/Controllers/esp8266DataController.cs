@@ -1,6 +1,6 @@
 ﻿using Amazon.DynamoDBv2.DataModel;
 using Microsoft.AspNetCore.Mvc;
-using testApi.Models;
+using TempCommon;
 
 namespace DynamoDB.Demo.Controllers
 {

@@ -1,6 +1,11 @@
 ﻿using Amazon.DynamoDBv2.DataModel;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace testApi.Models
+namespace TempCommon
 {
     [DynamoDBTable("esp8266Data")]
     public class esp8266Data
