@@ -1,5 +1,107 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model List<List<TempCommon.esp8266Data>>
 @{
+    //Layout = null;
 }
+
+<head>
+	<script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+		<script>
+			window.onload = function () 
+			{
+			var chart = new CanvasJS.Chart("chartContainer1", {
+				animationEnabled: true,
+				title: {
+					text: "Brians Temperature And Humidity"
+				},
+				toolTip: {
+					shared: true
+				},
+				data: [{
+					type: "line",
+					lineColor: "red",
+					name: "Temperature",
+					showInLegend: true,
+					dataPoints: @Html.Raw(ViewBag.BrianTemp)
+								},
+				{
+					type: "line",
+					lineColor: "blue",
+					name: "Humidity",
+					showInLegend: true,
+					dataPoints: @Html.Raw(ViewBag.BrianHumid)
+								}]
+				});
+
+			var chart2 = new CanvasJS.Chart("chartContainer2", {
+				animationEnabled: true,
+				title: {
+					text: "Seans Temperature And Humidity"
+				},
+				toolTip: {
+					shared: true
+				},
+				data: [{
+					type: "line",
+					lineColor: "red",
+					name: "Temperature",
+					showInLegend: true,
+					dataPoints: @Html.Raw(ViewBag.SeanTemp)
+								},
+				{
+					type: "line",
+					lineColor: "blue",
+					name: "Humidity",
+					showInLegend: true,
+					dataPoints: @Html.Raw(ViewBag.SeanHumid)
+								}]
+				});
+
+			var chart3 = new CanvasJS.Chart("chartContainer3", {
+				animationEnabled: true,
+				title: {
+					text: "Daniels Temperature And Humidity"
+				},
+				toolTip: {
+					shared: true
+				},
+				data: [{
+					type: "line",
+					lineColor: "red",
+					name: "Temperature",
+					showInLegend: true,
+					dataPoints: @Html.Raw(ViewBag.DanielTemp)
+								},
+				{
+					type: "line",
+					lineColor: "blue",
+					name: "Humidity",
+					showInLegend: true,
+					dataPoints: @Html.Raw(ViewBag.DanielHumid)
+								}]
+				});
+
+				chart.render();
+				chart2.render();
+				chart3.render();
+		}
+	</script>
+
+	<script>
+		window.setTimeout(function () {
+			window.location.reload(true);
+			//alert("reloading page");
+		}, 15000);
+	</script>
+</head>
+
+	<body>
+		<h1>Brians Graph</h1>
+		<div id="chartContainer1" style="height: 370px; width: 100%;"></div>
+	
+		<h1>Seans Graph</h1>
+		<div id="chartContainer2" style="height: 370px; width: 100%;"></div>
+
+		<h1>Daniels Graph</h1>
+		<div id="chartContainer3" style="height: 370px; width: 100%;"></div>
+		@* <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script> *@
+	</body>

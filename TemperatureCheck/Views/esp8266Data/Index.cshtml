@@ -13,7 +13,7 @@
 
 @foreach(var element in Model)
         {
-        <h4>This is @Html.DisplayFor(modelItem => element[0].thing)</h4>
+        <h4>This is data for @Html.DisplayFor(modelItem => element[0].thing)</h4>
 
         <table class="table">
             <thead>
@@ -56,10 +56,10 @@
         }
 
 @* This is used to update the page when new data comes from dynamoDB *@
-@* <script>
+<script>
     window.setTimeout(function() 
     {
         window.location.reload(true);
-        alert("reloading page");
-    }, 30000);
-</script> *@
+        //alert("reloading page");
+    }, 15000);
+</script>
