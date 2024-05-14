@@ -5,6 +5,7 @@ using TempCommon;
 
 namespace DynamoBusiness
 {
+    //client to Web API which returns data from DynamoDB database
     public class DynamoClient
     {
         Uri baseAddr = new Uri("https://localhost:7032");
@@ -18,23 +19,25 @@ namespace DynamoBusiness
 
             _client = new HttpClient();
             _client.BaseAddress = baseAddr;
+            temperatureData = getData();
         }
 
         //retrieves data from Rest Web API method
         public List<esp8266Data> getData()
         {
+            List<esp8266Data> getList = new List<esp8266Data>();
             HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "api/esp8266Data/GetAll").Result;
 
             if (response.IsSuccessStatusCode == true)
             {
                 string data = response.Content.ReadAsStringAsync().Result;
-                temperatureData = JsonConvert.DeserializeObject<List<esp8266Data>>(data);
+				getList = JsonConvert.DeserializeObject<List<esp8266Data>>(data);
             }
 
-            //sorts data from descending order to display newest information first
-            temperatureData = sortingData(temperatureData);
+			//sorts data from descending order to display newest information first
+			getList = sortingData(getList);
 
-            return temperatureData;
+            return getList;
         }
 
         public List<DateTime> sortDates(List<DateTime> dates)
@@ -96,17 +99,6 @@ namespace DynamoBusiness
                     danielsData.Add(data);
                 }
             }
-
-            //temp sinced daniel has no data
-            //DateTime currentDateTime = DateTime.Now;
-
-            //esp8266Data temp = new esp8266Data();
-            //temp.timestamp = currentDateTime.ToString("yyyy-MM-dd HH:mm:ss");
-            //temp.humidity = "0";
-            //temp.temperature = "0";
-            //temp.thing = "esp8266-Daniel";
-
-            //danielsData.Add(temp);
 
             filteredData.Add(briansData);
             filteredData.Add(seansData);    

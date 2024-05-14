@@ -18,6 +18,8 @@ namespace DynamoDB.Demo.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
+            //retrieves data from DynamoDb table
+            //takes 5-15 seconds for data to be retrieved as I believe AWS must verify credentials of computer to ensure the table is being accessed safely
             List<esp8266Data> products = await _context.ScanAsync<esp8266Data>(default).GetRemainingAsync();
             
             return Ok(products);

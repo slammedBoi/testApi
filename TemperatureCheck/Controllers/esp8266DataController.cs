@@ -1,21 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TempCommon;
+using DynamoBusiness;
 
 namespace TemperatureCheck.Controllers
 {
     public class esp8266DataController : Controller
     {
-        //Uri baseAddr = new Uri("https://localhost:7032");
-        //private HttpClient _client;
-
+        //references the DynamoDB client to acceess the data from DynamoDB
         DynamoBusiness.DynamoClient dynamoReference {  get; set; }
 
         public esp8266DataController()
         { 
-            //_client = new HttpClient();
-            //_client.BaseAddress = baseAddr;
-
-            dynamoReference = new DynamoBusiness.DynamoClient();
+            dynamoReference = new DynamoClient();
         }
 
         public IActionResult Index()
@@ -23,9 +19,11 @@ namespace TemperatureCheck.Controllers
             List<List<esp8266Data>> filteringCompleted = new List<List<esp8266Data>>();
             List<esp8266Data> tempList = new List<esp8266Data>();
 
-            tempList = dynamoReference.getData();
+            //gets all data from database (unfiltered)
+            tempList = dynamoReference.temperatureData;//dynamoReference.getData();
 
             //filtering must be done
+            //filteres data into specified lists, one for each microcontroller
             filteringCompleted = dynamoReference.filterData(tempList);
 
             return View(filteringCompleted);
